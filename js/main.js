@@ -12,14 +12,19 @@
 
 
 // 1) Define required constants
-const playerOne = "X"
-const playerTwo = "O"
+// const playerOne = "X"
+// const playerTwo = "O"
+
+const x = 1
+const o = -1
 const WinCombinations = [
-    []
+    [sq0, sq1, sq2],
+    [sq3, sq4, sq ]
+
 ]
 
 // 2) Define required variables used to track the state of the game
-let pickSymbol, boxClicked
+let sqClicked
 
 // 3) Store elements on the page that will be accessed in code more than once in variables to make code more concise, readable and performant.
 
@@ -30,4 +35,18 @@ let pickSymbol, boxClicked
 
 // 5) Handle a player clicking a square
 
+
+
 // 6) Handle a player clicking the replay button
+
+
+
+// document.querySelectorAll('evt')
+//     .addEventListener('click', handButtonClick)
+
+// document.getElementById('resetGame')
+//     .addEventListener('click', handButtonClick)
+
+document.getElementsByTagName('table')
+    .addEventListener('click', handButtonClick)    
+    console.log(document.getElementsByTagName('table');
