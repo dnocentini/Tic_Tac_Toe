@@ -64,7 +64,8 @@ function handleClick (evt) {
         clickedSq.textContent = 'O'
     };
 
-    turn += 1;  
+    turn += 1;
+    checkGameState(); 
 
     // console.log(evt.target.textContent); 
 
@@ -75,18 +76,18 @@ function checkGameState () {
         console.log('Winner!');
         return;
     };
-    if (turn >= maxTurns) {
+    if (turn > maxTurns) {
         console.log('Tie!');
     };
 };
 
 function verifyWinningCombinations () {
     for (i = 0; i < winningCombinations.length; i ++) {
-        let square0 = gameBoardEl.getElementById(winningCombinations[i][0].toString()).textContent;
-        let square1 = gameBoardEl.getElementById(winningCombinations[i][1].toString()).textContent;
-        let square2 = gameBoardEl.getElementById(winningCombinations[i][2].toString()).textContent;
-        
-        if (square0 === square1 === square2 && square0 !== '') {
+        let square0 = document.getElementById(winningCombinations[i][0].toString()).textContent;
+        let square1 = document.getElementById(winningCombinations[i][1].toString()).textContent;
+        let square2 = document.getElementById(winningCombinations[i][2].toString()).textContent;
+
+        if (square0 === square1 && square0 === square2 && square0 !== '') {
             return true;
         }
     } 
