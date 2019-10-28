@@ -49,3 +49,8 @@ body {
     cursor: pointer;
     align-items: center;
  }
+
+ .message {
+    font-size: 20px;
+   
+ }

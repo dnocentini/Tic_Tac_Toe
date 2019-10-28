@@ -16,7 +16,7 @@
 const xPlayer = 1
 const oPlayer = -1
 const empty = 0
-const WinningCombinations = [
+const winningCombinations = [
     [1, 2, 3],
     [4, 5, 6],
     [7, 8, 9],
@@ -30,12 +30,12 @@ const maxTurns = 9;
 
 
 /*----- app's state (variables) -----*/
-let clickedSq, turn, winner
+var clickedSq, turn, winner, message
 
 /*----- cached element references -----*/
-gameBoardEl = document.getElementById ('game-board')
+gameBoardEl = document.getElementById('game-board');
 resetGameBtn = document.getElementById('resetGame');
-
+messageEl = document.getElementsByClassName('message');
 
 /*----- event listeners -----*/
 gameBoardEl.addEventListener('click', handleClick);
@@ -48,6 +48,8 @@ function init () {
     turn = 1
 };
 
+
+/* When xPlayer or oPlayer 'clicks' in a square, "X" or "O" will appears inside the square clicked*/
 function handleClick (evt) {
     evt.preventDefault();
     let clickedSq = evt.target;
@@ -62,13 +64,35 @@ function handleClick (evt) {
         clickedSq.textContent = 'O'
     };
 
-    turn += 1;
+    turn += 1;  
 
-    console.log(evt.target.textContent); 
-
+    // console.log(evt.target.textContent); 
 
 };
 
+function checkGameState () {
+    if (verifyWinningCombinations() === true) {
+        console.log('Winner!');
+        return;
+    };
+    if (turn >= maxTurns) {
+        console.log('Tie!');
+    };
+};
+
+function verifyWinningCombinations () {
+    for (i = 0; i < winningCombinations.length; i ++) {
+        let square0 = gameBoardEl.getElementById(winningCombinations[i][0].toString()).textContent;
+        let square1 = gameBoardEl.getElementById(winningCombinations[i][1].toString()).textContent;
+        let square2 = gameBoardEl.getElementById(winningCombinations[i][2].toString()).textContent;
+        
+        if (square0 === square1 === square2 && square0 !== '') {
+            return true;
+        }
+    } 
+    
+    return false;
+}
 
 
 
