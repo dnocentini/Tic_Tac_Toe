@@ -1,54 +1,75 @@
-/*playerOne wiil be "X" and playerTwo will be "O"*/
-/*playerOne will 'click' in a square and "X" will appears inside the square clicked*/
+/*xPlayer wiil be "X" and oPlayer will be "O"*/
+/*xPlayer will 'click' in a square and "X" will appears inside the square clicked*/
 /*return*/
 /*anotherPlayerTurns*/
-/*playerTwo will 'click' in a square and "X" will appears inside the square clicked*/
+/*oPlayer will 'click' in a square and "O" will appears inside the square clicked*/
 /*return*/
 /*anotherPlayerTurns*/
-/*the game will not return if a player does one of the winCombinations*/
-/*the "winCombinations" is basically when the first player to get 3 of he/her marks in a row (up, down, across, or diagonally) is the winner.*/
+/*the game will not return if a player does one of the winningCombinations*/
+/*the "winningCombinations" is basically when the first player to get 3 of he/her marks in a row (up, down, across, or diagonally) is the winner.*/
 /*when all 9 squares are full, the game is over.*/
 
 
 /*----- constants -----*/
 // const playerOne = "X"
 // const playerTwo = "O"
-const x = 1
-const o = -1
-const WinCombinations = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8 ],
-    []
+const xPlayer = 1
+const oPlayer = -1
+const empty = 0
+const WinningCombinations = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+    [1, 4, 7],
+    [2, 5, 8],
+    [3, 6, 9],
+    [1, 5, 9],
+    [3, 5, 7]
+];
+const maxTurns = 9;
 
-]
 
 /*----- app's state (variables) -----*/
-let gameBoardEl = document.getElementById ('game-board')
-
-let sqClicked
+let clickedSq, turn, winner
 
 /*----- cached element references -----*/
+gameBoardEl = document.getElementById ('game-board')
+resetGameBtn = document.getElementById('resetGame');
 
 
 /*----- event listeners -----*/
-gameBoardEl.addEventListener('click', handButtonClick);
-}    
-
+gameBoardEl.addEventListener('click', handleClick);
+resetGameBtn.addEventListener('click', resetGame);
 
 /*----- functions -----*/
+init ();
 
-function handButtonClick (evt) {
-    console.log(evt.target.id); 
+function init () {
+    turn = 1
+};
 
+function handleClick (evt) {
+    evt.preventDefault();
+    let clickedSq = evt.target;
 
-
+    if(clickedSq.tagName !== 'TD' || clickedSq.textContent === 'X' || clickedSq.textContent === 'O' ) {
+        return;
+    }
     
+    if ( turn %2 === 1) {
+        clickedSq.textContent = 'X'
+    } else {
+        clickedSq.textContent = 'O'
+    };
 
-// document.querySelectorAll('evt')
-//     .addEventListener('click', handButtonClick)
+    turn += 1;
 
-// document.getElementById('resetGame')
-//     .addEventListener('click', handButtonClick)
+    console.log(evt.target.textContent); 
+
+
+};
+
+
+
 
 
