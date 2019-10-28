@@ -41,16 +41,22 @@ body {
     align-items: center;
  }
  #resetGame {
-    display: block;
     font-size: 1rem;
     padding: .7rem;
-    margin-top: 2rem;
     outline: none;
     cursor: pointer;
-    align-items: center;
+    
  }
 
- .message {
-    font-size: 20px;
+ #rg {
+    display: flex;
+    justify-content: center;
+   
+ }
+
+ #message {
+    padding: 2rem;
+    font-size: 40px;
+    text-align: center;
    
  }

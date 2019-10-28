@@ -30,27 +30,36 @@ const maxTurns = 9;
 
 
 /*----- app's state (variables) -----*/
-var clickedSq, turn, winner, message
+var clickedSq, turn
 
+var gameOver = false;
 /*----- cached element references -----*/
 gameBoardEl = document.getElementById('game-board');
 resetGameBtn = document.getElementById('resetGame');
-messageEl = document.getElementsByClassName('message');
+messageEl = document.getElementById('message');
 
 /*----- event listeners -----*/
 gameBoardEl.addEventListener('click', handleClick);
-resetGameBtn.addEventListener('click', resetGame);
+resetGameBtn.addEventListener('click', init);
 
 /*----- functions -----*/
-init ();
+init();
 
-function init () {
+function init() {
     turn = 1
+    gameOver = false;
+    messageEl.innerText = 'Good Luck!';
+    for(i = 1; i <= 9; i ++) {
+        document.getElementById(i.toString()).textContent = ''
+    }
 };
 
 
 /* When xPlayer or oPlayer 'clicks' in a square, "X" or "O" will appears inside the square clicked*/
-function handleClick (evt) {
+function handleClick(evt) {
+    if (gameOver === true) {
+        return;
+    }
     evt.preventDefault();
     let clickedSq = evt.target;
 
@@ -71,17 +80,19 @@ function handleClick (evt) {
 
 };
 
-function checkGameState () {
+function checkGameState() {
     if (verifyWinningCombinations() === true) {
-        console.log('Winner!');
+        gameOver = true;
+        messageEl.innerText = 'Winner!';
         return;
     };
     if (turn > maxTurns) {
-        console.log('Tie!');
+        gameOver = true;
+        messageEl.innerText = 'Tie!';
     };
 };
 
-function verifyWinningCombinations () {
+function verifyWinningCombinations() {
     for (i = 0; i < winningCombinations.length; i ++) {
         let square0 = document.getElementById(winningCombinations[i][0].toString()).textContent;
         let square1 = document.getElementById(winningCombinations[i][1].toString()).textContent;
@@ -93,7 +104,7 @@ function verifyWinningCombinations () {
     } 
     
     return false;
-}
+};
 
 
 
